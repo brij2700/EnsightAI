@@ -1,0 +1,137 @@
+<!-- templates/dashboard.html -->
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <script src='https://cdn.plot.ly/plotly-2.32.0.min.js'></script>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title> Ensight - Dashboard</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@2.9.4/dist/Chart.min.js"></script>
+    <!-- Include chartjs-gauge plugin -->
+    <script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-gauge/dist/chartjs-plugin-gauge.min.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" />
+
+    <link rel="stylesheet" href="../static/style.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/round-slider/dist/roundslider.min.css">
+
+
+</head>
+
+<body>
+    <div class="row top-bar">
+        <div class="col">
+            <button class="btn btn-dark sidebar-toggle-btn large-btn" onclick="openChat()">
+                <i class="fas fa-bolt"></i>EnsightAI
+            </button>
+            <span></span>
+            <span></span>
+            <span></span>
+            </button>
+        </div>
+        <div class="col text-right">
+            <span>Welcome, {{ username }}</span>
+        </div>
+    </div>
+    <div class="container-fluid">
+        <div class="row">
+
+
+
+            <div class="new" >
+                <div class="card">
+                    <div class="card-body">
+                        <canvas id="donutChart" width="360" height="350"></canvas>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md-4 col-lg-4">
+                <div class="card2">
+                    <div class="card2-body">
+
+                        <div id="gaugeChart"></div>
+
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md-4 col-lg-4">
+                <div class="card">
+                    <div class="card-body">
+                        <canvas id="radial_chart"></canvas>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+
+    </div>
+    <div class="row">
+        <div class="col-md-6 col-lg-6 mb-4">
+            <div class="card">
+                <div class="card-body">
+                    <canvas id="lineChart"></canvas>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-6 col-lg-6 mb-4">
+            <div class="card">
+                <div class="card-body">
+                    <canvas id="double_bargraph"></canvas>
+                </div>
+            </div>
+        </div>
+
+
+
+
+
+
+
+
+    </div>
+
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.7.0/chart.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/round-slider/dist/roundslider.min.js"></script>
+
+
+    <script src="..\static\line_chart.js"></script>
+    <script src="..\static\double_bargraph.js"></script>
+    <script src="..\static\donut_chart.js"></script>
+    <script src="..\static\radial_chart.js"></script>
+    <script src="..\static\gaugeChart.js"></script>
+
+    <script>
+        var dailyData = {{ daily | tojson}};
+        var monthlyData = {{ monthly | tojson}}
+        var avgAcornData = {{ avg_acorn_data | tojson}}
+        var score = {{ score }}
+
+        let donutChart = null;
+        let lineChart = null;
+        let barGraph = null;
+
+        generateLineChart(monthlyData, "Total Consumption", avgAcornData);
+        generateDonutChart(dailyData[0][dailyData[0].length - 1], `${dailyData[0][dailyData[0].length - 1].day}`,avgAcornData);
+        generateBarGraph(dailyData, "Total Consumption");
+        createRadarChart(monthlyData, avgAcornData, 12);
+        slider_function(score)
+
+
+
+
+        function openChat() {
+            window.open("chat", "_blank");
+        }
+    </script>
+
+
+</body>
+
+</html>

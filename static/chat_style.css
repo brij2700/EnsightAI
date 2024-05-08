@@ -1,0 +1,100 @@
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #222; /* Dark background color */
+    color: #eee; /* Light text color */
+}
+#chat-container {
+    width: 600px; /* Increased chat window width */
+    margin: 50px auto;
+    border: 1px solid #444; /* Darker border color */
+    border-radius: 5px;
+    overflow: hidden;
+    background-color: #333; /* Dark chat background color */
+}
+#chat-messages {
+    padding: 10px;
+    height: 400px; /* Increased chat window height */
+    overflow-y: scroll;
+}
+
+#chat-messages::-webkit-scrollbar-thumb {
+    background-color: #666; /* Dark gray for scrollbar thumb */
+    border-radius: 10px; /* Rounded corners for scrollbar thumb */
+}
+.message {
+    margin-bottom: 10px;
+    overflow: hidden;
+}
+.message.user .message-body {
+    background-color: #558B2F; /* Dark green for user messages */
+    float: right;
+}
+.message.bot .message-body {
+    background-color: #666; /* Dark gray for bot messages */
+    float: left;
+}
+.message .message-body {
+    max-width: 70%;
+    padding: 15px 20px; /* Increased padding for better visibility */
+    border-radius: 20px;
+    clear: both;
+    position: relative; /* Positioning for icons */
+}
+.message.user .message-body::before {
+    content: '';
+    display: inline-block;
+    width: 15px; /* Increased icon size */
+    height: 15px; /* Increased icon size */
+    background-image: url('checkmark.png'); /* Checkmark icon */
+    background-size: cover;
+    position: absolute;
+    left: -25px; /* Adjusted icon position */
+    top: 50%;
+    transform: translateY(-50%);
+}
+.message.bot .message-body::before {
+    content: '';
+    display: inline-block;
+    width: 15px; /* Increased icon size */
+    height: 15px; /* Increased icon size */
+    background-image: url('robot.png'); /* Robot icon */
+    background-size: cover;
+    position: absolute;
+    right: -25px; /* Adjusted icon position */
+    top: 50%;
+    transform: translateY(-50%);
+}
+#user-input {
+    width: calc(100% - 60px);
+    padding: 15px;
+    border: none;
+    border-top: 1px solid #444; /* Darker border color */
+    box-sizing: border-box;
+    float: left;
+    border-radius: 5px 0 0 5px;
+    background-color: #444; /* Dark input background color */
+    color: #eee; /* Light input text color */
+}
+#send-button {
+    width: 60px;
+    padding: 15px;
+    border: none;
+    border-top: 1px solid #444; /* Darker border color */
+    box-sizing: border-box;
+    float: right;
+    background-color: #558B2F; /* Dark green for button */
+    color: #eee; /* Light button text color */
+    border-radius: 0 5px 5px 0;
+    cursor: pointer;
+}
+.title-container {
+    text-align: center;
+    margin-top: 50px;
+    font-size: 24px;
+}
+.title-icon {
+    vertical-align: middle;
+    margin-left: 10px;
+}
